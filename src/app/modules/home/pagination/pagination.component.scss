@@ -1,0 +1,16 @@
+.pagination-section {
+  padding-bottom: var(--footer-height);
+  nav {
+    margin-bottom: 24px;
+
+    ul {
+      li {
+        cursor: pointer;
+
+      }
+      span {
+        color: black;
+      }
+    }
+  }
+}

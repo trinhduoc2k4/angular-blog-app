@@ -1,0 +1,228 @@
+.profile-article {
+  li:hover {
+    background-color: #ccc;
+  }
+  li {
+    margin: 8px 8px;
+    border-bottom: 1px solid #ccc;
+    cursor: pointer;
+    // Test CSS
+    box-shadow: 0 20px 30px rgb(0 0 0 / 20%), inset 0px 10px 30px 5px rgb(255 255 255);
+    padding: 2px 16px;
+    width: 100%;
+    height: 280px;
+    border-radius: 10px;
+    transition: all 0.3s linear;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+
+    .image-item {
+      width: 200px;
+      height: 200px;
+      align-self: center;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-right: 16px;
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    .article-item-wrap {
+      flex: 1;
+    }
+  }
+}
+.account {
+  padding-bottom: 90px;
+}
+.information-account {
+  padding: 0 5%;
+}
+
+.banner {
+  position: relative;
+}
+
+.information-img img {
+  margin-top: -6%;
+  // width: 20%;
+}
+
+.information-name {
+  display: inline-block;
+  margin-left: 25%;
+}
+
+img.ava {
+  position: absolute;
+  border-radius: 50%;
+  border: 5px solid var(--primary-color);
+  width: 200px;
+  height: 200px;
+}
+
+.information-name p.name {
+  font-weight: bold;
+  font-size: 40px;
+  line-height: 58px;
+  margin-top: 1rem;
+  color: #24272e;
+}
+
+.information-name p {
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 27px;
+  color: #24272e;
+}
+
+.information-account .point {
+  float: right;
+  margin-top: -6%;
+  box-shadow: 0px 4px 10px rgb(0 0 0 / 25%);
+}
+
+.profile-page .user-info .action-btn {
+  float: right;
+  color: #999;
+  border: 1px solid #999;
+}
+
+.btn-sm,
+.btn-group-sm > .btn {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  border-radius: 0.2rem;
+}
+
+.loading {
+  margin-top: 10%;
+  text-align: center;
+}
+
+.article {
+  margin-bottom: 10%;
+  margin-top: 5%;
+}
+
+.nav {
+  width: 50%;
+}
+
+.nav-justified {
+  margin-top: 6rem;
+}
+
+// .information-img {
+//     position: relative;
+// }
+.banner-img {
+  width: 100%;
+  height: 400px;
+}
+
+.box {
+  margin-top: -6%;
+  position: absolute;
+  // top: -50%;
+  width: 200px;
+  height: 200px;
+  font-size: 14px;
+  border-radius: 50%;
+  // -webkit-mask: linear-gradient(#000 0 0) top /100% 70%, linear-gradient(#000 0 0) bottom right/70% 20%, radial-gradient(circle closest-side, #000 90%, #0000) bottom left/25% 25%;
+  // -webkit-mask-repeat: no-repeat;
+  background: linear-gradient(90deg, #ccca 40%, #fffa, #ccca 60%) right/300% 100%;
+  animation: m 1s linear infinite;
+}
+
+.box-banner {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 400px;
+  font-size: 14px;
+  // -webkit-mask: linear-gradient(#000 0 0) top /100% 70%, linear-gradient(#000 0 0) bottom right/70% 20%, radial-gradient(circle closest-side, #000 90%, #0000) bottom left/25% 25%;
+  // -webkit-mask-repeat: no-repeat;
+  background: linear-gradient(90deg, #ccca 40%, #fffa, #ccca 60%) right/300% 100%;
+  animation: m 1s linear infinite;
+}
+
+@keyframes m {
+  to {
+    background-position: left;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  img.ava {
+    position: absolute;
+    border-radius: 50%;
+    border: 5px solid var(--primary-color);
+    width: 150px;
+    height: 150px;
+  }
+  .box {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    font-size: 14px;
+    border-radius: 50%;
+    // -webkit-mask-repeat: no-repeat;
+    background: linear-gradient(90deg, #ccca 40%, #fffa, #ccca 60%) right/300% 100%;
+    animation: m 1s linear infinite;
+  }
+  .information-name {
+    margin-top: 0;
+  }
+  .information-account {
+    margin-top: -3%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .information-name {
+    margin-left: 0;
+    text-align: center;
+    margin-top: 40%;
+  }
+  .information-name {
+    margin-left: 0;
+    text-align: center;
+    margin-top: 40%;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  img.ava {
+    position: absolute;
+    border-radius: 50%;
+    border: 5px solid var(--primary-color);
+    width: 150px;
+    height: 150px;
+    transform: translate(40%, 0px);
+  }
+  .box {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    font-size: 14px;
+    border-radius: 50%;
+    // -webkit-mask-repeat: no-repeat;
+    background: linear-gradient(90deg, #ccca 40%, #fffa, #ccca 60%) right/300% 100%;
+    animation: m 1s linear infinite;
+    transform: translate(40%, 0px);
+  }
+}
+@media screen and (max-width: 400px) {
+  .profile-article li {
+    flex-direction: column;
+
+    .image-item {
+      width: 100%;
+      height: 100px;
+    }
+  }
+}

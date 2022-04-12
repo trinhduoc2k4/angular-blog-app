@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;900&display=swap');
+.error {
+  margin-top: 4px;
+  color: rgb(185, 17, 17);
+  font-size: 14px;
+}
+.edit-form-wrap {
+  padding-bottom: 88px;
+}
+button.disable {
+  opacity: 0.4;
+}
+button.disable:hover {
+  cursor: no-drop;
+}
+.editForm {
+    position: relative;
+    width: 60%;
+    margin: auto;
+    border-radius: 20px;
+    padding: 40px;
+    box-sizing: border-box;
+    background: #f1f1f1;
+    box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
+    margin-top: 30px;
+}
+
+.brand-title {
+    margin-top: 10px;
+    font-weight: 900;
+    font-size: 1.8rem;
+    color: black;
+    letter-spacing: 1px;
+}
+
+.inputs {
+    text-align: left;
+    margin-top: 30px;
+}
+
+label,
+input,
+textarea {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+}
+
+label {
+    margin-bottom: 4px;
+}
+
+label:nth-of-type(2) {
+    margin-top: 12px;
+}
+
+input::placeholder {
+    color: gray;
+}
+
+input {
+    background: #ecf0f3;
+    padding: 10px;
+    padding-left: 20px;
+    height: 50px;
+    font-size: 14px;
+    border-radius: 20px;
+    box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
+}
+
+textarea {
+    width: 100%;
+    background: #ecf0f3;
+    padding: 10px;
+    padding-left: 20px;
+    height: 100px;
+    font-size: 14px;
+    border-radius: 20px;
+    box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
+    border-color: #ecf0f3;
+}
+
+button.update {
+    color: white;
+    margin-top: 20px;
+    background: #0d6efd;
+    height: 40px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 900;
+    box-shadow: 6px 6px 6px #cbced1, -6px -6px 6px white;
+    transition: 0.5s;
+    padding: 0 25px;
+    border: 1px solid var(--primary-color);
+}
+
+button:hover {
+    box-shadow: none;
+}
+
+a {
+    position: absolute;
+    font-size: 8px;
+    bottom: 4px;
+    right: 4px;
+    text-decoration: none;
+    color: black;
+    background: yellow;
+    border-radius: 10px;
+    padding: 2px;
+}
+
+h1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+@media screen and (max-width: 992px) {
+    .editForm {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .editForm {
+        width: 100%;
+    }
+}
+
+.input-item {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.box {
+    position: absolute;
+    top: 28px;
+    width: 100%;
+    height: 50px;
+    font-size: 14px;
+    border-radius: 20px;
+    // -webkit-mask: linear-gradient(#000 0 0) top /100% 70%, linear-gradient(#000 0 0) bottom right/70% 20%, radial-gradient(circle closest-side, #000 90%, #0000) bottom left/25% 25%;
+    // -webkit-mask-repeat: no-repeat;
+    background: linear-gradient(90deg, #ccca 40%, #fffa, #ccca 60%) right/300% 100%;
+    animation: m 1s linear infinite;
+}
+
+.box-textarea {
+    position: absolute;
+    top: 28px;
+    width: 100%;
+    height: 100px;
+    font-size: 14px;
+    border-radius: 20px;
+    // -webkit-mask: linear-gradient(#000 0 0) top /100% 70%, linear-gradient(#000 0 0) bottom right/70% 20%, radial-gradient(circle closest-side, #000 90%, #0000) bottom left/25% 25%;
+    // -webkit-mask-repeat: no-repeat;
+    background: linear-gradient(90deg, #ccca 40%, #fffa, #ccca 60%) right/300% 100%;
+    animation: m 1s linear infinite;
+}
+
+@keyframes m {
+    to {
+        background-position: left;
+    }
+}

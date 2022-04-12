@@ -1,0 +1,321 @@
+<div *ngIf="articleDetail" class="my-3 pb-5" style="padding-bottom: 90px;">
+  <div id="head">
+    <h1>
+      {{ articleDetail.title }}
+    </h1>
+    <div class="d-flex justify-content-start">
+      <div class="mt-2">
+        <img [src]="articleDetail.author.image" alt="avatar" class="rounded-circle" style="width: 32px; height: 32px;">
+      </div>
+      <div class="ms-2 me-4">
+        <div class="fw-bold">
+          {{ articleDetail.author.username }}
+        </div>
+        <div>
+          {{ articleDetail.createdAt | date: "longDate"}}
+        </div>
+      </div>
+      <div *ngIf="isAuthor; else notAuthor">
+        <div *ngIf="login" class="d-flex">
+          <div class="mt-2 me-2">
+            <button class="btn border btn-outline-secondary" [routerLink]="['/editor/edit-article', slug]">
+              <i class="fa-solid fa-pen"></i>
+              <span class="hide-text">
+                Edit Article
+              </span>
+            </button>
+          </div>
+          <div class="mt-2 me-2">
+            <button class="btn border-danger btn-outline-danger" (click)="delArticle()">
+              <i class="fa-solid fa-trash-can"></i>
+              <span class="hide-text">
+                Delete Article
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <ng-template #notAuthor>
+        <div *ngIf="!login || (login && !isFollow); else noFollow">
+          <div class="mt-2 me-2">
+            <button class="btn border btn-outline-secondary" (click)="followUser()">
+              <i class="fa-solid fa-plus"></i>
+              <span class="hide-text">
+                Follow {{ articleDetail.author.username }}
+              </span>
+            </button>
+          </div>
+        </div>
+        <ng-template #noFollow>
+          <div class="mt-2 me-2">
+            <button class="btn border btn-outline-secondary" (click)="unFollowUser()">
+              <i class="fa-solid fa-minus"></i>
+              <span class="hide-text">
+                Unfollow {{ articleDetail.author.username }}
+              </span>
+            </button>
+          </div>
+        </ng-template>
+        <div class="mt-2">
+          <div *ngIf="!login || (!isFavorite && login); else noFavorite">
+            <button class="btn border-success btn-outline-success" (click)="favorite()">
+              <i class="fa-solid fa-heart"></i>
+              <span class="hide-text">
+
+                Favorite Article ({{ favoriteCount }})
+              </span>
+            </button>
+          </div>
+          <ng-template #noFavorite>
+            <button class="btn border-success btn-outline-success" (click)="unFavorite()">
+              <i class="fa-solid fa-heart-crack"></i>
+              <span class="hide-text">
+
+                Unfavorite Article ({{ favoriteCount }})
+              </span>
+            </button>
+          </ng-template>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+  <div id="body" class="mb-3 mt-4" style="text-align: justify;">
+    <div class="mb-1">
+      {{ articleDetail.body }}
+    </div>
+    <button class="btn border rounded-pill text-secondary mt-1 mb-2" *ngFor="let tag of articleDetail.tagList">
+      {{ tag }}
+    </button>
+    <hr>
+    <div class="row col-8 offset-3 hide-text">
+      <div class="d-flex justify-content-start my-3">
+        <div class="mt-2">
+          <img [src]="articleDetail.author.image" alt="avatar" class="rounded-circle" style="width: 32px; height: 32px;">
+        </div>
+        <div class="ms-2 me-4">
+          <div class="fw-bold">
+            {{ articleDetail.author.username }}
+          </div>
+          <div>
+            {{ articleDetail.createdAt | date: "longDate"}}
+          </div>
+        </div>
+        <div *ngIf="isAuthor; else notAuthor">
+          <div *ngIf="login" class="d-flex">
+            <div class="mt-2 me-2">
+              <button class="btn border btn-outline-secondary" [routerLink]="['/editor/edit-article', slug]">
+                <i class="fa-solid fa-pen"></i>
+                Edit Article
+              </button>
+            </div>
+            <div class="mt-2 me-2">
+              <button class="btn border-danger btn-outline-danger" (click)="delArticle()">
+                <i class="fa-solid fa-trash-can"></i>
+                Delete Article
+              </button>
+            </div>
+          </div>
+        </div>
+        <ng-template #notAuthor>
+          <div *ngIf="!login || (login && !isFollow); else noFollow">
+            <div class="mt-2 me-2">
+              <button class="btn border btn-outline-secondary" (click)="followUser()">
+                <i class="fa-solid fa-plus"></i>
+                Follow {{ articleDetail.author.username }}
+              </button>
+            </div>
+          </div>
+          <ng-template #noFollow>
+            <div class="mt-2 me-2">
+              <button class="btn border btn-outline-secondary" (click)="unFollowUser()">
+                <i class="fa-solid fa-minus"></i>
+                Unfollow {{ articleDetail.author.username }}
+              </button>
+            </div>
+          </ng-template>
+          <div class="mt-2">
+            <div *ngIf="!login || (!isFavorite && login); else noFavorite">
+              <button class="btn border-success btn-outline-success" (click)="favorite()">
+                <i class="fa-solid fa-heart"></i>
+                Favorite Article ({{ favoriteCount }})
+              </button>
+            </div>
+            <ng-template #noFavorite>
+              <button class="btn border-success btn-outline-success" (click)="unFavorite()">
+                <i class="fa-solid fa-heart-crack"></i>
+                Unfavorite Article ({{ favoriteCount }})
+              </button>
+            </ng-template>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+    <div *ngIf="!login">
+      <span (click)="checkLogin()" style="text-decoration: none; color: #198754;" class="fw-bold">Sign in</span> or <span (click)="checkLogin()" style="text-decoration: none; color: #198754;" class="fw-bold">sign up</span> to add comments on this article.
+    </div>
+    <div *ngIf="login">
+      <div class="card">
+        <form [formGroup]="textArea" class="form-group">
+          <textarea name="" formControlName="cmt" rows="4" class="form-control" cols="12">
+          </textarea>
+        </form>
+        <div class="card-header">
+          <div class="d-flex justify-content-between">
+            <img [src]="user.image" alt="avatar" class="rounded-circle" style="width: 32px; height: 32px;">
+            <button class="btn btn-success fw-bold" (click)="postCmt()">Post Comment</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="allComments" class="mt-4">
+      <div class="card my-3" *ngFor="let cmt of allComments.comments">
+        <div class="card-body">
+          {{ cmt.body }}
+        </div>
+        <div class="card-header">
+          <div class="d-flex justify-content-between">
+            <div class="d-flex">
+              <img [src]="cmt.author.image" alt="avatar" class="rounded-circle" style="width: 32px; height: 32px;">
+              <div class="mt-1 ms-2 text-secondary">
+                {{ cmt.author.username }}  {{ cmt.createdAt | date: "longDate"}}
+              </div>
+            </div>
+            <div *ngIf="login && user">
+              <div *ngIf="user.username === cmt.author.username" class="fs-4" role="button" (click)="delComment(cmt)">
+                <i class="fa-solid fa-trash-can"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Loading Page  -->
+<div class="my-3 pb-5" *ngIf="!articleDetail">
+  <div id="head">
+    <ngx-skeleton-loader
+      count="1"
+      appearance="line"
+      animation="progress"
+      [theme]="{
+        'background-color': 'gray',
+        height: '2.5vw',
+        width: '15vw',
+        'border-radius': '10px'
+      }"
+    ></ngx-skeleton-loader>
+    <div class="row col-6 d-flex align-items-center">
+      <div class="col-1">
+        <ngx-skeleton-loader
+          count="1"
+          appearance="circle"
+          animation="progress"
+          [theme]="{
+            height: '3vw',
+            width: '3vw',
+            'border-radius': '50%',
+            'background-color': 'rgb(200 203 208)'
+          }"
+        ></ngx-skeleton-loader>
+      </div>
+      <div class="col-10 mt-2 ms-1">
+        <ngx-skeleton-loader
+          count="1"
+          appearance="line"
+          animation="progress"
+          [theme]="{
+            height: '2.5vw',
+            'border-radius': '10px',
+            'background-color': 'rgb(200 203 208)'
+          }"
+        ></ngx-skeleton-loader>
+      </div>
+    </div>
+  </div>
+  <div id="body" class="mb-3 mt-4" style="text-align: justify">
+    <div class="mb-1">
+      <ngx-skeleton-loader
+        count="1"
+        appearance="line"
+        animation="progress"
+        [theme]="{
+          height: '8vw',
+          'border-radius': '10px'
+        }"
+      ></ngx-skeleton-loader>
+    </div>
+    <ngx-skeleton-loader
+      count="1"
+      appearance="line"
+      animation="progress"
+      [theme]="{
+        height: '2.5vw',
+        width: '8vw',
+        'border-radius': '10px',
+        'background-color': 'rgb(200 203 208)'
+      }"
+    ></ngx-skeleton-loader>
+    <hr />
+    <div class="d-flex justify-content-center align-items-center">
+      <div class="row col-6 d-flex align-items-center">
+        <div class="col-1">
+          <ngx-skeleton-loader
+            count="1"
+            appearance="circle"
+            animation="progress"
+            [theme]="{
+              height: '3vw',
+              width: '3vw',
+              'border-radius': '50%',
+              'background-color': 'rgb(200 203 208)'
+            }"
+          ></ngx-skeleton-loader>
+        </div>
+        <div class="col-10 mt-2 ms-1">
+          <ngx-skeleton-loader
+            count="1"
+            appearance="line"
+            animation="progress"
+            [theme]="{
+              height: '2.5vw',
+              'border-radius': '10px',
+              'background-color': 'rgb(200 203 208)'
+            }"
+          ></ngx-skeleton-loader>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <div class="card-body body"></div>
+        <div class="card-header header">
+          <ngx-skeleton-loader
+            count="1"
+            appearance="circle"
+            animation="progress"
+            [theme]="{
+              height: '2.6vw',
+              width: '2.6vw',
+              'border-radius': '50%',
+              'background-color': 'gray'
+            }"
+          ></ngx-skeleton-loader>
+          <ngx-skeleton-loader
+            count="1"
+            appearance="line"
+            animation="progress"
+            [theme]="{
+              height: '2.5vw',
+              width: '8vw',
+              'border-radius': '10px',
+              'background-color': 'gray'
+            }"
+            style="margin: auto 0"
+          ></ngx-skeleton-loader>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

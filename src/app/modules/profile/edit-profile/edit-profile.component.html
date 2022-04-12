@@ -1,0 +1,61 @@
+<div class="edit-form-wrap">
+  <div class="editForm">
+    <form (ngSubmit)="updateProfile()"  [formGroup]="formUpdate">
+        <div class="brand-title text-center">Your Settings</div>
+        <div class="inputs">
+            <div class="input-item">
+                <label for="image" class="form-label">Link Image</label>
+                <input type="text" id="image" name="image"  formControlName="image">
+                <div class="error" *ngIf="image.touched || image.dirty && image.errors">
+                  <span *ngIf="image.errors?.['required']">Image is required</span>
+                </div>
+
+                <div class="box" *ngIf="isLoading"></div>
+            </div>
+            <div class="input-item">
+                <label for="username" class="form-label">Name</label>
+                <input type="text" id="username" formControlName="username" name="username">
+                <div class="error" *ngIf="username.touched || username.dirty && username.errors">
+                  <span *ngIf="username.errors?.['required']">Username is required</span>
+                </div>
+                <div class="error" *ngIf="hasErrorName">
+                  <span *ngIf="error.username">{{error.username}}</span>
+                </div>
+                <div class="box" *ngIf="isLoading"></div>
+            </div>
+            <div class="input-item">
+                <label for="bio" class="form-label">About</label>
+                <textarea id="bio" rows="5" id="bio" formControlName="bio" name="bio"></textarea>
+                <div class="box-textarea" *ngIf="isLoading"></div>
+            </div>
+            <div class="input-item">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" id="email" formControlName="email" name="email">
+                <div class="error" *ngIf="email.touched || email.dirty && email.errors">
+                  <span *ngIf="email.errors?.['required']">Email is required</span>
+                  <span *ngIf="email.errors?.['email']">Enter a valid email</span>
+                </div>
+                <div class="error" *ngIf="hasErrorEmail">
+                  <span *ngIf="error.email">{{error.email}}</span>
+                </div>
+                <div class="box" *ngIf="isLoading"></div>
+            </div>
+            <div class="input-item">
+                <label for="password" class="form-label">New Password</label>
+                <input type="password" id="password" formControlName="password" name="password">
+                <div class="box" *ngIf="isLoading"></div>
+            </div>
+            <div class="text-end">
+
+                <button type="submit" [disabled]="!formUpdate.valid" [class.disable]="!formUpdate.valid" class="update">Update Settings</button>
+            </div>
+        </div>
+    </form>
+
+    <hr>
+    <button class="btn btn-outline-danger" (click)="handleLogout()">
+        Or click here to logout.
+    </button>
+</div>
+
+</div>

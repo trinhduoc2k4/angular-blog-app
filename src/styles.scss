@@ -1,0 +1,28 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+:root {
+  --header-height: 70px;
+  --footer-height: 60px;
+  --primary-color: #fff;
+  --active-color: #0078ff;
+  --sea-color: #41baff;
+}
+
+body {
+  // background: rgb(0, 220, 149, 0.21);
+  color: #333;
+  font: 100% Lato, Arial, Sans Serif;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.caret-color {
+  caret-color: transparent;
+}

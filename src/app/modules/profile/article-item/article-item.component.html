@@ -1,0 +1,46 @@
+<div class="article-item">
+  <div class="article-info d-flex align-items-center justify-content-between">
+    <div class="article-user d-flex">
+      <div class="article-user-img rounded-circle d-flex align-items-center">
+        <img class="rounded-circle" [src]="article.author.image" alt="" />
+      </div>
+      <div class="article-user-name d-flex flex-column">
+        <span class="username caret-color">{{ article.author.username }}</span>
+        <span class="article-date">{{
+          article.updatedAt | date: "longDate"
+        }}</span>
+      </div>
+    </div>
+    <div
+      class="article-action d-flex align-items-center caret-color"
+      (click)="handleActionLike()"
+    >
+      <span class="article-icon-like position-relative">
+        <i class="fa-solid fa-heart position-absolute" #unLiked></i>
+        <i
+          class="fa-solid fa-heart position-absolute favorite"
+          [class.liked]="isLiked"
+          #liked
+        ></i>
+      </span>
+      <span class="ms-2">{{ likedCount }}</span>
+    </div>
+  </div>
+  <div class="article-content mt-3">
+    <div class="article-title caret-color">{{ article.title }}</div>
+    <div class="article-description">{{ article.description }}</div>
+  </div>
+  <div class="read-more d-flex align-items-center justify-content-between">
+    <div
+      class="read-more-text caret-color"
+      [routerLink]="'/editor/article/' + article.slug"
+    >
+      Read more...
+    </div>
+    <ul class="tags d-flex flex-row w-100 justify-content-end">
+      <li class="tags-item" *ngFor="let tag of article.tagList">
+        {{ tag }}
+      </li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,77 @@
+<div *ngIf="!isLoading" class="wrapper fadeInDown pad">
+  <div id="formContent">
+    <div class="fadeIn first">
+      <h1 class="caret-color">Sign In</h1>
+    </div>
+    <div *ngIf="hasError" class="alert alert-danger m-30">
+      <span *ngIf="error.message">
+        email or password {{error.message}}
+      </span>
+    </div>
+    <form (ngSubmit)="onSubmit()" [formGroup]="formLogin">
+      <input
+        type="text"
+        id="email"
+        class="fadeIn second"
+        name="email"
+        placeholder="email"
+        formControlName="email"
+        [(ngModel)]="emailInput"
+        required
+      />
+      <div
+        *ngIf="
+          formLogin.controls.email?.errors?.required &&
+          formLogin.controls.email?.touched
+        "
+        class="alert alert-danger m-30"
+      >
+        Email is required
+      </div>
+      <div
+        *ngIf="
+          formLogin.controls.email?.errors?.email &&
+          formLogin.controls.email?.dirty
+        "
+        class="alert alert-danger m-30"
+      >
+        Email is invalid
+      </div>
+      <input
+        type="password"
+        id="password"
+        class="fadeIn third"
+        name="password"
+        placeholder="password"
+        formControlName="password"
+        [(ngModel)]="passwordInput"
+      />
+      <div
+        *ngIf="
+          formLogin.controls.password?.errors?.required &&
+          formLogin.controls.password?.touched
+        "
+        class="alert alert-danger m-30"
+      >
+        Password is required
+      </div>
+      <input
+        type="submit"
+        class="fadeIn fourth"
+        value="Log In"
+        [disabled]="emailInput === '' || passwordInput === ''"
+      />
+    </form>
+    <div id="formFooter">
+      <a class="underlineHover" routerLink="/auth/sign-up">Need an account?</a>
+    </div>
+  </div>
+</div>
+<div *ngIf="isLoading" class="d-flex justify-content-center" style="margin-top: 200px;">
+  <div class="spinner-border" role="status">
+      <span class="sr-only" id="loading"></span>
+  </div>
+</div>
+
+
+

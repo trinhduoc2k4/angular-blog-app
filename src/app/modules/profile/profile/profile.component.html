@@ -1,0 +1,142 @@
+<link
+  href="//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"
+  rel="stylesheet"
+  type="text/css"
+/>
+<div class="account">
+  <!-- <img width="100%" [src]="banner"> -->
+
+  <div class="information">
+    <div class="container">
+      <div class="banner">
+        <img
+          class="banner-img"
+          [src]="
+            isLoadingProfile
+              ? ''
+              : 'https://hanoispiritofplace.com/wp-content/uploads/2018/04/anh-bia-dep-ve-phong-canh-thien-nhien-21.jpg'
+          "
+        />
+
+        <div *ngIf="isLoadingProfile" class="box-banner"></div>
+      </div>
+      <div class="information-account">
+        <div class="information-img">
+          <div class="box"></div>
+          <div>
+            <img *ngIf="author?.image" class="ava" src="{{ author?.image }}" />
+          </div>
+          <div class="information-name">
+            <p class="name">{{ authorName }}</p>
+            <p>
+              {{ author?.bio }}
+            </p>
+          </div>
+        </div>
+
+        <div class="point" *ngIf="isOwn">
+          <a
+            ui-sref="app.settings"
+            routerLink="/profile/edit"
+            class="btn btn-sm btn-outline-secondary action-btn"
+            ng-show="$ctrl.isUser"
+            href="#/settings"
+          >
+            <i class="ion-gear-a"></i> Edit Profile Settings
+          </a>
+        </div>
+        <div class="point" *ngIf="!isOwn" (click)="handleFollow()">
+          <div
+            ui-sref="app.settings"
+            class="btn btn-sm btn-outline-secondary action-btn"
+            ng-show="$ctrl.isUser"
+            href="#/settings"
+          >
+            <i class="ion-gear-a"></i> {{ unFollow ? "UnFollow" : "Follow" }}
+          </div>
+        </div>
+      </div>
+      <ul class="nav nav-tabs nav-justified">
+        <li class="nav-item" style="cursor: pointer">
+          <span
+            class="nav-link"
+            (click)="getArticles('mine')"
+            [class.active]="currentTab === 'mine'"
+            >My Articles</span
+          >
+        </li>
+        <li class="nav-item" style="cursor: pointer">
+          <span
+            class="nav-link"
+            (click)="getArticles('liked')"
+            [class.active]="currentTab === 'liked'"
+            >Favorited Articles</span
+          >
+        </li>
+      </ul>
+
+      <div class="article">
+        <div *ngIf="isLoading" class="loading">
+          <div
+            class="spinner-border text-success"
+            role="status"
+            style="width: 3rem; height: 3rem"
+          >
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+        <div *ngIf="isNothing && !isLoading">Nothing here</div>
+        <div *ngIf="!isLoading">
+          <ul class="profile-article" *ngIf="articles">
+            <li
+              #articleItem
+              class="article-li position-relative"
+              (click)="
+                handleChangeArticle($event, item.slug, item.author.username)
+              "
+              *ngFor="let item of articles.articles; let i= index"
+            >
+              <div class="image-item">
+                <img [src]="i >= 7 ? imgs[i % 7] : imgs[i]" alt="">
+              </div>
+              <div class="article-item-wrap">
+                <app-article-item [article]="item"></app-article-item>
+              </div>
+            </li>
+          </ul>
+
+          <nav aria-label="Page navigation example">
+            <ul
+              class="pagination justify-content-end"
+              style="cursor: pointer"
+              *ngIf="pages.length > 1"
+            >
+              <li
+                *ngIf="currentPage > 1"
+                class="page-item"
+                (click)="handleChangePage(currentPage - 2)"
+              >
+                <span class="page-link">Previous</span>
+              </li>
+              <li
+                *ngFor="let item of pages; let i = index"
+                [class.active]="i + 1 === currentPage"
+                class="page-item"
+                (click)="handleChangePage(i)"
+              >
+                <span class="page-link">{{ i + 1 }}</span>
+              </li>
+              <li
+                *ngIf="currentPage < pages.length"
+                class="page-item"
+                (click)="handleChangePage(currentPage)"
+              >
+                <span class="page-link">Next</span>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

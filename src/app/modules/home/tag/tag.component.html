@@ -1,0 +1,27 @@
+<div class="tags-section">
+  <div class="tags-search mb-2 mt-2">
+    <div class="form-group d-flex align-items-center position-relative">
+      <i class="fa-solid fa-magnifying-glass position-absolute"></i>
+      <input type="text" class="form-control" name="search" id="search" placeholder="Find something here"/>
+    </div>
+  </div>
+  <div class="tags-header" (click)="isDown = !isDown">
+    <span class="caret-color">
+      <span class="tags-header-title-lg">Popular Tags</span>
+      <span class="tags-header-title-sm">{{ tag }}</span>
+      <i *ngIf="!isDown" class="fa-solid fa-arrow-down-long"></i>
+      <i *ngIf="isDown" class="fa-solid fa-arrow-up-long"></i>
+    </span>
+  </div>
+  <div class="tags-body" [class.active]="isDown">
+    <ul class="tags-list d-flex flex-wrap">
+      <li
+        *ngFor="let item of listTags"
+        class="tags-item text-center caret-color"
+        (click)="handleChangeTag(item)"
+      >
+        #{{ item }}
+      </li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+.header {
+    height: 3vw;
+    box-sizing: content-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.body {
+    height: 7vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media only screen and (max-width: 480px) {
+    .hide-text {
+        display: none;
+    }
+  }

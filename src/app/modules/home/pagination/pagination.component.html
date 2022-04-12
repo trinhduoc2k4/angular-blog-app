@@ -1,0 +1,29 @@
+<div *ngIf="limit <= articleList.articlesCount" class="pagination-section">
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-end">
+      <li
+        *ngIf="currentPage > 1"
+        class="page-item"
+        (click)="handleChangePage(currentPage - 2)"
+      >
+        <span class="page-link caret-color">Previous</span>
+      </li>
+      <li
+        *ngFor="let item of listPage; let i = index"
+        [class.active]="i + 1 === currentPage"
+        class="page-item"
+        (click)="handleChangePage(i)"
+      >
+        <span class="page-link caret-color">{{ i + 1 }}</span>
+      </li>
+
+      <li
+        *ngIf="listPage.length > currentPage"
+        (click)="handleChangePage(currentPage)"
+        class="page-item"
+      >
+        <span class="page-link caret-color">Next</span>
+      </li>
+    </ul>
+  </nav>
+</div>

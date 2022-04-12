@@ -1,0 +1,63 @@
+<div id="header">
+  <div class="container-md d-flex h-100">
+    <nav
+      class="navbar navbar-expand-sm navbar-light d-flex align-items-center justify-content-between"
+    >
+      <div class="col-2">
+        <a class="navbar-brand caret-color" routerLink="/home">Bubbler</a>
+      </div>
+
+      <div class="col-10">
+        <div class="navbar-mobile caret-color" (click)="handleActiveNavbar()">
+          <i class="fa-solid fa-bars"></i>
+        </div>
+        <ul
+          #navbar
+          appClickOutSide
+          class="navbar-nav mr-auto mt-lg-0 w-100 justify-content-end align-items-center mobile"
+        >
+          <li class="nav-item" [routerLinkActive]="'active'">
+            <a class="nav-link caret-color" routerLink="home">
+              <i class="fa-solid fa-house-user"></i>
+              <span>Home</span>
+            </a>
+          </li>
+          <li *ngIf="isLoggedIn" class="nav-item" [routerLinkActive]="'active'">
+            <a class="nav-link" routerLink="/editor/new-article">
+              <i class="fa-solid fa-pen-to-square"></i>
+              <span>New Article</span>
+            </a>
+          </li>
+          <li *ngIf="isLoggedIn" class="nav-item" [routerLinkActive]="'active'">
+            <a class="nav-link" routerLink="/profile/edit">
+              <i class="fa-solid fa-gear"></i>
+              <span class="caret-color">Settings</span>
+            </a>
+          </li>
+          <li *ngIf="!isLoggedIn" class="nav-item" [routerLinkActive]="'active'">
+            <a class="nav-link caret-color" routerLink="/auth">Sign In</a>
+          </li>
+          <li *ngIf="!isLoggedIn" class="nav-item">
+            <a class="nav-link caret-color" routerLink="/auth/sign-up"
+              >Sign Up</a
+            >
+          </li>
+          <li *ngIf="isLoggedIn" class="nav-item" >
+            <a class="nav-link" [routerLink]="changeUserPage(user?.username)">
+              <div class="d-flex align-items-center">
+                <img class="user-avatar" [src]="user?.image" alt="" />
+                <span class="ms-1 caret-color">{{ user?.username }}</span>
+              </div>
+            </a>
+          </li>
+          <!-- <li *ngIf="isLoggedIn" class="nav-item">
+            <div class="nav-link">
+              <i class="fa-solid fa-right-from-bracket"></i>
+              <span class="caret-color">Log Out</span>
+            </div>
+          </li> -->
+        </ul>
+      </div>
+    </nav>
+  </div>
+</div>

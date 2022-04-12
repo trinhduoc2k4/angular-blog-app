@@ -1,0 +1,76 @@
+<div class="row col-10 offset-1 mt-5" *ngIf="newArticle" style="padding-bottom: 90px;">
+  <form [formGroup]="newArticle" class="form-group">
+    <input
+      type="text"
+      formControlName="title"
+      class="form-control my-3"
+      placeholder="Article Title"
+      required
+    />
+    <div
+      *ngIf="
+        newArticle.controls['title'].invalid &&
+        (newArticle.controls['title'].dirty ||
+          newArticle.controls['title'].touched)
+      "
+      class="alert alert-danger"
+    >
+      <div *ngIf="newArticle.controls['title'].errors?.['required']">
+        Title is Required!
+      </div>
+    </div>
+    <div *ngIf="errorTitle" class="alert alert-danger">
+      Title is duplicate!
+    </div>
+    <input
+      type="text"
+      formControlName="description"
+      class="form-control my-3"
+      placeholder="What's this article about?"
+      required
+    />
+    <div
+      *ngIf="
+        newArticle.controls['description'].invalid &&
+        (newArticle.controls['description'].dirty ||
+          newArticle.controls['description'].touched)
+      "
+      class="alert alert-danger"
+    >
+      <div *ngIf="newArticle.controls['description'].errors?.['required']">
+        Description is Required!
+      </div>
+    </div>
+    <textarea
+      type="text"
+      formControlName="body"
+      class="form-control my-3"
+      placeholder="Write your article (in markdown)"
+      rows="5"
+      required
+    ></textarea>
+    <div
+      *ngIf="
+        newArticle.controls['body'].invalid &&
+        (newArticle.controls['body'].dirty ||
+          newArticle.controls['body'].touched)
+      "
+      class="alert alert-danger"
+    >
+      <div *ngIf="newArticle.controls['body'].errors?.['required']">
+        Content is Required!
+      </div>
+    </div>
+    <input
+      type="text"
+      formControlName="tag"
+      class="form-control my-3"
+      placeholder="Enter tags, start with hashtag. Example: #code#depzai"
+    />
+    <div class="text-end">
+      <button class="btn btn-success" (click)="createArticle()" [disabled]="newArticle.invalid">
+        Publish Article
+      </button>
+    </div>
+  </form>
+</div>

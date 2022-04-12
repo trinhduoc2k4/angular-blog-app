@@ -1,0 +1,48 @@
+<div class="article-section">
+  <div class="article-header d-flex">
+    <div
+      *ngFor="let item of listTabs"
+      (click)="handleActiveTab(item)"
+      [class.active]="item === tag"
+      class="article-header-item me-3 caret-color mb-2"
+    >
+      {{ item }}
+    </div>
+    <div class="mobile">
+      <app-tag></app-tag>
+    </div>
+  </div>
+  <div class="article-body">
+    <div *ngIf="isPending" class="article-loading">
+      <div class="skeleton">
+        <div class="shimmer"></div>
+      </div>
+      <div class="skeleton">
+        <div class="shimmer"></div>
+      </div>
+      <div class="skeleton">
+        <div class="shimmer"></div>
+      </div>
+    </div>
+    <div *ngIf="!isPending && isNothing">Nothing here</div>
+    <div *ngIf="!isPending" class="article-list">
+      <ul #listArticle *ngIf="articles">
+        <li
+          #articleItem
+          class="article-li position-relative"
+          (click)="handleChangeArticle($event, item.slug, item.author.username)"
+          *ngFor="let item of articles.articles; let i=index"
+        >
+        <div class="image-item">
+          <img [src]="i >= 7 ? imgs[i % 7] : imgs[i]" alt="">
+        </div>
+        <div class="article-item-wrap">
+          <app-article-item [article]="item"></app-article-item>
+        </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<app-pagination *ngIf="!isPending" [articleList]="articles"></app-pagination>
